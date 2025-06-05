@@ -6,7 +6,7 @@ const AuthRedirect = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated) {
-    <Navigate to="/dashboard" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

@@ -2,10 +2,20 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FiHome, FiUser, FiLogIn, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
+import api from "../utils/api";
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/api/auth/user/logout");
+      logout();
+    } catch (error) {
+      console.log("Logout failed:", error);
+    }
+  };
 
   return (
     <nav className="bg-gray-800 text-gray-100 border-b border-gray-700">
@@ -38,7 +48,7 @@ const Navbar = () => {
                   Profile
                 </Link>
                 <button
-                  onClick={logout}
+                  onClick={() => handleLogout()}
                   className="bg-gray-700 hover:bg-blue-500 px-4 py-2 rounded-md transition-colors flex items-center gap-1"
                 >
                   <FiLogOut className="text-sm" />
@@ -98,7 +108,7 @@ const Navbar = () => {
                 </Link>
                 <button
                   onClick={() => {
-                    logout();
+                    handleLogout();
                     setMobileMenuOpen(false);
                   }}
                   className="w-full bg-gray-700 hover:bg-blue-500 px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2"

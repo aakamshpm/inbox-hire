@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { FiUser, FiMail, FiLock, FiLogIn, FiUserPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import api from "../utils/api";
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 type FormData = {
   name: string;
@@ -18,6 +21,9 @@ const Login = () => {
     password: "",
   });
 
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -26,14 +32,31 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isLogin) {
-      // Handle login logic
-      console.log("Logging in with:", formData.username, formData.password);
-    } else {
-      // Handle register logic
-      console.log("Registering with:", formData);
+    let response;
+    try {
+      if (isLogin) {
+        response = await api.post(`/api/auth/user/login`, {
+          username: formData.username,
+          password: formData.password,
+        });
+      } else {
+        response = await api.post(`/api/auth/user/register`, {
+          name: formData.name,
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
+        });
+      }
+      login(response.data.accessToken);
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log("Axios error:", error.response?.data || error.message);
+      } else {
+        console.log("Unexpected error:", error);
+      }
     }
   };
 
@@ -140,7 +163,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
+              className="cursor-pointer w-full bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
             >
               {isLogin ? (
                 <>
@@ -161,7 +184,7 @@ const Login = () => {
               {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
               <button
                 onClick={() => setIsLogin(!isLogin)}
-                className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                className="text-blue-400 hover:text-blue-300 transition-colors font-medium cursor-pointer"
               >
                 {isLogin ? "Register" : "Login"}
               </button>

@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import { notFound, errorHandler } from "./middleware/error.middleware";
 import inboundRoutes from "./routes/inbound";
 import authRoutes from "./routes/auth";
@@ -10,6 +11,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("InboxHire API is running!");

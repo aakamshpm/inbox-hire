@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { supabase } from "../config/supabase";
-import bcrypt from "bcrypt";
-
-const DOMAIN = process.env.MAIL_DOMAIN!;
+import bcrypt from "bcryptjs";
+import { DOMAIN } from "../utils/constants";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+import setToken from "../utils/setToken";
 
 const registerUser = async (req: Request, res: Response) => {
   try {
@@ -83,6 +84,11 @@ const loginUser = async (req: Request, res: Response) => {
       res.status(401);
       throw new Error("Invalid password");
     }
+
+    const refreshToken = generateRefreshToken(user.id);
+    const acccessToken = generateAccessToken(user.id);
+
+    await setToken(res, refreshToken, acccessToken);
 
     res.status(200).json({
       message: "Login successful",

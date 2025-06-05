@@ -32,11 +32,9 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     // accessToken invalid, check for refresh
     if (!refreshToken) {
-      return res
-        .status(401)
-        .json({
-          message: "Invalid or Expired Access Token, and No Refresh Token",
-        });
+      return res.status(401).json({
+        message: "Invalid or Expired Access Token, and No Refresh Token",
+      });
     }
 
     try {
@@ -49,7 +47,6 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
         }
       );
 
-      // Optional: attach to header so frontend can refresh its token
       res.setHeader("Authorization", `Bearer ${newAccessToken}`);
 
       req.userId = decoded.userId;

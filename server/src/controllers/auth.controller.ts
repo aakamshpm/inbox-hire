@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { DOMAIN } from "../utils/constants";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 import setToken from "../utils/setToken";
+import { access } from "fs";
 
 const registerUser = async (req: Request, res: Response) => {
   try {
@@ -88,7 +89,7 @@ const loginUser = async (req: Request, res: Response) => {
     const refreshToken = generateRefreshToken(user.id);
     const acccessToken = generateAccessToken(user.id);
 
-    await setToken(res, refreshToken, acccessToken);
+    await setToken(res, refreshToken);
 
     res.status(200).json({
       message: "Login successful",
@@ -96,6 +97,7 @@ const loginUser = async (req: Request, res: Response) => {
         inbox_email: user.inbox_email,
         username: user.username,
       },
+      accessToken: acccessToken,
     });
   } catch (error) {
     res.status(500);
@@ -105,4 +107,20 @@ const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-export { registerUser, loginUser };
+const logoutUser = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    res.status(500);
+    throw new Error(
+      error instanceof Error ? error.message : "Internal Server Error"
+    );
+  }
+};
+
+export { registerUser, loginUser, logoutUser };

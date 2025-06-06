@@ -4,7 +4,7 @@ import parseEmailWithGemini from "../utils/gemini";
 
 interface ParsedEmail {
   job_title?: string;
-  company?: string;
+  company_name?: string;
   status?: string;
   notes?: string;
   is_reply?: boolean;
@@ -87,7 +87,8 @@ const handleInboundEmail = async (req: Request, res: Response) => {
 
       const match = existingApplications?.find(
         (app) =>
-          app.company?.toLowerCase() === parsed.company?.toLowerCase() &&
+          app.company_name?.toLowerCase() ===
+            parsed.company_name?.toLowerCase() &&
           app.job_title?.toLowerCase() === parsed.job_title?.toLowerCase()
       );
 
@@ -118,7 +119,7 @@ const handleInboundEmail = async (req: Request, res: Response) => {
         user_id: user.id,
         job_title: parsed?.job_title,
         source_email: From,
-        company_name: parsed?.company,
+        company_name: parsed?.company_name,
         status: parsed?.status,
         body_preview: TextBody,
         is_reply: false,

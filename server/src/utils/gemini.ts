@@ -17,7 +17,7 @@ ${body}
 Return a JSON with:
 {
   "job_title": "...",
-  "company": "...",
+  "company_name": "...",
   "status": "...", // e.g. "applied", "interview", "rejected", "offer"
   "notes": "...", // summary or key info from body
   "is_reply": true/false

@@ -6,6 +6,7 @@ const REFRESH_SECRET = process.env.REFRESH_TOKEN_SECRET!;
 const DOMAIN = process.env.MAIL_DOMAIN!;
 const SUPABASE_URL = process.env.SUPABASE_URL!;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
 
 export {
   ACCESS_SECRET,
@@ -13,4 +14,5 @@ export {
   DOMAIN,
   SUPABASE_URL,
   SUPABASE_SERVICE_ROLE_KEY,
+  GEMINI_API_KEY,
 };

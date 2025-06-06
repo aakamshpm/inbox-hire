@@ -16,7 +16,6 @@ const errorHandler = (
 ) => {
   // Check if the error has a status code, otherwise default to 500
   const statusCode = err.statusCode || 500;
-  console.log(`${err}`);
   console.log(`Error Message: ${err.message}`);
   // Send the error response
   res.status(statusCode).json({

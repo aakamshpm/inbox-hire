@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { ACCESS_SECRET, REFRESH_SECRET } from "../utils/constants";
+import {
+  generateAccessToken,
+  verifyAccessToken,
+  verifyRefreshToken,
+} from "../utils/jwt";
 
 declare global {
   namespace Express {
@@ -8,10 +11,6 @@ declare global {
       userId?: string;
     }
   }
-}
-
-interface JwtPayload {
-  userId: string;
 }
 
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
@@ -26,7 +25,7 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const decoded = jwt.verify(accessToken!, ACCESS_SECRET) as JwtPayload;
+    const decoded = verifyAccessToken(accessToken!);
     req.userId = decoded.userId;
     return next();
   } catch (error) {
@@ -38,21 +37,16 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
     }
 
     try {
-      const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as JwtPayload;
-      const newAccessToken = jwt.sign(
-        { userId: decoded.userId },
-        ACCESS_SECRET,
-        {
-          expiresIn: "30m",
-        }
-      );
+      const decoded = verifyRefreshToken(refreshToken);
+      const newAccessToken = generateAccessToken(decoded.userId);
 
       res.setHeader("Authorization", `Bearer ${newAccessToken}`);
 
       req.userId = decoded.userId;
       return next();
     } catch (err) {
-      return res.status(401).json({ message: "Invalid Refresh Token" });
+      res.status(401);
+      throw new Error("Invalid or Expired Refresh Token");
     }
   }
 };

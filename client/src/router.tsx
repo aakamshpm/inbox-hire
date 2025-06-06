@@ -8,6 +8,8 @@ import AuthRedirect from "./components/AuthRedirect";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
+import Guide from "./pages/Guide";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +31,17 @@ const router = createBrowserRouter(
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }
+      />
+
+      <Route path="/guide" element={<Guide />} />
     </Route>
   )
 );

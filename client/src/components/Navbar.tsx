@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { FiHome, FiUser, FiLogIn, FiLogOut, FiMenu, FiX } from "react-icons/fi";
+import {
+  FiHome,
+  FiUser,
+  FiLogIn,
+  FiLogOut,
+  FiMenu,
+  FiX,
+  FiBook,
+} from "react-icons/fi";
 import { useState } from "react";
 import api from "../utils/api";
 
@@ -31,10 +39,17 @@ const Navbar = () => {
           </Link>
 
           <div className="flex items-center gap-6">
+            <Link
+              to="/guide"
+              className="hover:text-blue-400 transition-colors flex items-center gap-1"
+            >
+              <FiBook className="text-sm" />
+              Guide
+            </Link>
             {isAuthenticated ? (
               <>
                 <Link
-                  to="/dashboard"
+                  to="/"
                   className="hover:text-blue-400 transition-colors flex items-center gap-1"
                 >
                   <FiHome className="text-sm" />
@@ -49,7 +64,7 @@ const Navbar = () => {
                 </Link>
                 <button
                   onClick={() => handleLogout()}
-                  className="bg-gray-700 hover:bg-blue-500 px-4 py-2 rounded-md transition-colors flex items-center gap-1"
+                  className="bg-gray-700 cursor-pointer hover:bg-blue-500 px-4 py-2 rounded-md transition-colors flex items-center gap-1"
                 >
                   <FiLogOut className="text-sm" />
                   Logout
@@ -88,10 +103,18 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4">
+            <Link
+              to="/guide"
+              className="block hover:text-blue-400 transition-colors py-2 flex items-center gap-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <FiBook />
+              Guide
+            </Link>
             {isAuthenticated ? (
               <>
                 <Link
-                  to="/dashboard"
+                  to="/"
                   className="block hover:text-blue-400 transition-colors py-2 flex items-center gap-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -111,7 +134,7 @@ const Navbar = () => {
                     handleLogout();
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full bg-gray-700 hover:bg-blue-500 px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2"
+                  className="w-full cursor-pointer bg-gray-700 hover:bg-blue-500 px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2"
                 >
                   <FiLogOut />
                   Logout

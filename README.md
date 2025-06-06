@@ -47,7 +47,7 @@
 
 - **Frontend**: Vite + React + Tailwind + TypeScript
 - **Backend**: Express.js (TypeScript) + Supabase (PostgreSQL)
-- **Email Parsing**: Postmark Webhook + Gemini 1.5 Pro
+- **Email Parsing**: Postmark Webhook + Gemini 1.5 Flash
 
 ---
 
@@ -80,7 +80,7 @@ npm run dev
 
 ```bash
 PORT=8000
-NODE_ENV=your_prefered_mode
+NODE_ENV=development
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_service_role_key
 GEMINI_API_KEY=your_gemini_key
@@ -89,7 +89,7 @@ REFRESH_TOKEN_SECRET=your_refresh_secret_key
 MAIL_DOMAIN=aakamshpm.space
 ```
 
-#### Use ngrok if running locally and update the webhook URL in Postmark inbound settings.
+> Use ngrok if running locally and update the webhook URL in Postmark inbound settings.
 
 ## 🖥 Frontend Setup
 
@@ -111,22 +111,30 @@ VITE_SERVER_URL=your_backend_url
 - Send a test email (from Gmail or similar) and CC your inbox email (e.g., yourusername@yourdomain.com)
 - Watch as your application appears in the dashboard!
 
+---
+
 ### ⚠️ Limitations (Hackathon Version)
 
-- Only one shared domain (aakamshpm.space) is used for all users
-- Replies to job mails may not include the inbox email in CC, limiting automatic status updates
+- The main workflow supported: **sending from your private inbox and receiving replies**, which triggers parsing and DB entry.
+- Only one shared domain (`aakamshpm.space`) is used for all users.
+- Replies to job mails may not include the inbox email in CC, limiting automatic status updates in that case.
+
+---
 
 ### 📹 Demo Video
 
-- 🎥 Watch on YouTube:
-- 🙏 Acknowledgements
+🎥 Watch on YouTube: _link coming soon_
 
-  - Postmark for the fantastic Inbound Email support
-  - Supabase for PostgreSQL + auth layer
-  - Google Gemini for AI-based email parsing
+---
+
+### 🙏 Acknowledgements
+
+- Postmark for the fantastic Inbound Email support
+- Supabase for PostgreSQL
+- Google Gemini for AI-based email parsing
+
+---
 
 ### 📬 Contact
 
-- Made with 💙 by Aakamsh P M
-
----
+Made with 💙 by Aakamsh P M

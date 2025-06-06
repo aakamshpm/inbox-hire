@@ -8,9 +8,9 @@ const Guide: React.FC = () => {
       </h1>
 
       <p className="mb-4">
-        InboxHire is a smart job application tracker powered by email parsing.
-        It helps you manage and monitor the jobs you've applied for by simply
-        tracking your emails — no manual input needed.
+        InboxHire is a smart job application tracker powered by inbound email
+        parsing. It helps you manage and monitor your job hunt by tracking email
+        replies from companies — no spreadsheets or manual entry required.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">Getting Started</h2>
@@ -23,22 +23,30 @@ const Guide: React.FC = () => {
           </span>
         </li>
         <li>
-          Compose an email from your personal address (e.g., Gmail) to any
-          company you're applying to.
+          Send a job application email from your personal address (e.g., Gmail)
+          to the company you're applying to — just like you normally would.
         </li>
         <li>
-          Add your InboxHire email (<code>aakmsh@aakamshpm.space</code>) in the{" "}
-          <strong>CC</strong> field of the email.
+          When the company replies to your application, InboxHire (via Postmark)
+          will intercept that reply, extract relevant job details using AI, and
+          log it into your dashboard automatically.
         </li>
         <li>
-          Once the email is sent, InboxHire will automatically receive and
-          process it using Postmark, extracting job title, company name, and
-          other details using Gemini.
-        </li>
-        <li>
-          View and manage your job applications right inside the dashboard.
+          View your applications and status updates directly from the InboxHire
+          dashboard — organized, filtered, and AI-enhanced.
         </li>
       </ol>
+
+      <h2 className="text-2xl font-semibold mt-6 mb-2">
+        Alternative (Legacy) Option
+      </h2>
+      <p className="mb-4">
+        You can also include your InboxHire email (
+        <code>aakmsh@aakamshpm.space</code>) in the <strong>CC</strong> field
+        when applying. This works for initial applications but{" "}
+        <strong>won’t help</strong> with tracking replies (since companies
+        typically don’t CC you in responses).
+      </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">Current Limitations</h2>
       <ul className="list-disc ml-6 mb-6 space-y-2">
@@ -46,17 +54,21 @@ const Guide: React.FC = () => {
           We're currently using a shared domain: <code>aakamshpm.space</code>.
         </li>
         <li>
-          Custom inboxes per user like <code>yourname@inboxhire.dev</code> will
-          be available in production.
+          In production, each user will be provided a custom inbox like{" "}
+          <code>yourname@inboxhire.dev</code>, which supports end-to-end
+          parsing.
         </li>
         <li>
-          Make sure to CC the InboxHire email during job application — replies
-          from companies won't include the CC, so we currently cannot auto-track
-          responses unless simulated.
+          No actual inbox access is given to users — InboxHire only processes
+          emails programmatically via Postmark.
         </li>
         <li>
-          No actual email inbox access is given — the system just reads incoming
-          emails via Postmark’s inbound parsing.
+          You must use your private email to send applications and await replies
+          to see the full automation in action.
+        </li>
+        <li>
+          Users can edit their inbox email in the profile settings and use their
+          own private mail. (Don't use Gmail, as it will block Postmark emails.)
         </li>
       </ul>
 
@@ -74,8 +86,10 @@ const Guide: React.FC = () => {
       </p>
 
       <p className="text-sm text-gray-400">
-        For hackathon judging, please use the above test credentials and
-        simulate job applications using your own email client (e.g., Gmail).
+        For hackathon testing, please use the test credentials above and
+        simulate an application from your Gmail to a fake job. Wait for a fake
+        reply (or send it from another address) and see it show up in the
+        dashboard.
       </p>
     </div>
   );

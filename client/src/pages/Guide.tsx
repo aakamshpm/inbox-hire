@@ -23,8 +23,8 @@ const Guide: React.FC = () => {
           </span>
         </li>
         <li>
-          Send a job application email from your private address to the company
-          you're applying to.
+          Send a job application email from your private email (should be the
+          same as Inbox Mail - Check Profile) to the company you're applying to.
         </li>
         <li>
           When the company replies to your application, InboxHire (via Postmark)

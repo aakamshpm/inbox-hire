@@ -23,8 +23,8 @@ const Guide: React.FC = () => {
           </span>
         </li>
         <li>
-          Send a job application email from your personal address (e.g., Gmail)
-          to the company you're applying to — just like you normally would.
+          Send a job application email from your private address to the company
+          you're applying to.
         </li>
         <li>
           When the company replies to your application, InboxHire (via Postmark)
@@ -57,10 +57,6 @@ const Guide: React.FC = () => {
           In production, each user will be provided a custom inbox like{" "}
           <code>yourname@inboxhire.dev</code>, which supports end-to-end
           parsing.
-        </li>
-        <li>
-          No actual inbox access is given to users — InboxHire only processes
-          emails programmatically via Postmark.
         </li>
         <li>
           You must use your private email to send applications and await replies

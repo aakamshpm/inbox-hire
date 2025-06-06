@@ -68,7 +68,7 @@ const Guide: React.FC = () => {
         </li>
       </ul>
 
-      <h2 className="text-2xl font-semibold mt-6 mb-2">Demo Video</h2>
+      {/* <h2 className="text-2xl font-semibold mt-6 mb-2">Demo Video</h2>
       <p className="mb-4">
         Watch the full walkthrough and demo here:{" "}
         <a
@@ -79,7 +79,7 @@ const Guide: React.FC = () => {
         >
           InboxHire Demo
         </a>
-      </p>
+      </p> */}
 
       <p className="text-sm text-gray-400">
         For hackathon testing, please use the test credentials above and

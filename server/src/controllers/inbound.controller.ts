@@ -110,30 +110,27 @@ const handleInboundEmail = async (req: Request, res: Response) => {
 
         console.log("Updated existing application:", match.id);
         return;
-      } else {
-        console.log("No matching application found for reply");
       }
-    } else {
-      // New application
-      const { data, error } = await supabase.from("applications").insert({
-        user_id: user.id,
-        job_title: parsed?.job_title,
-        source_email: From,
-        company_name: parsed?.company_name,
-        status: parsed?.status,
-        body_preview: TextBody,
-        is_reply: false,
-        notes: parsed?.notes,
-        received_at: ReceivedAt,
-      });
-
-      if (error) {
-        console.log("Error inserting new application:", error);
-        return;
-      }
-
-      console.log("Inserted new application for user:", user.id);
     }
+    // New application
+    const { data, error } = await supabase.from("applications").insert({
+      user_id: user.id,
+      job_title: parsed?.job_title,
+      source_email: From,
+      company_name: parsed?.company_name,
+      status: parsed?.status,
+      body_preview: TextBody,
+      is_reply: false,
+      notes: parsed?.notes,
+      received_at: ReceivedAt,
+    });
+
+    if (error) {
+      console.log("Error inserting new application:", error);
+      return;
+    }
+
+    console.log("Inserted new application for user:", user.id);
   } catch (error) {
     res.status(500);
     console.log("Error processing inbound email:", error);

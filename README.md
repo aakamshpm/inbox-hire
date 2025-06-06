@@ -80,6 +80,7 @@ npm run dev
 
 ```bash
 PORT=8000
+NODE_ENV=your_prefered_mode
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_service_role_key
 GEMINI_API_KEY=your_gemini_key
@@ -120,11 +121,9 @@ VITE_SERVER_URL=your_backend_url
 - 🎥 Watch on YouTube:
 - 🙏 Acknowledgements
 
-  Postmark for the fantastic Inbound Email support
-
-  Supabase for PostgreSQL + auth layer
-
-  Google Gemini for AI-based email parsing
+  - Postmark for the fantastic Inbound Email support
+  - Supabase for PostgreSQL + auth layer
+  - Google Gemini for AI-based email parsing
 
 ### 📬 Contact
 

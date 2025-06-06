@@ -13,15 +13,18 @@ declare global {
   }
 }
 
-const authenticate = (req: Request, res: Response, next: NextFunction) => {
+const authenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   const accessToken = req.headers["authorization"]?.split(" ")[1]; // "Bearer <token>"
   const refreshToken = req.cookies["refreshToken"];
 
   // No tokens at all
   if (!accessToken && !refreshToken) {
-    return res
-      .status(401)
-      .json({ message: "Access Denied. No Token Provided" });
+    res.status(401).json({ message: "Access Denied. No Token Provided" });
+    return;
   }
 
   try {
@@ -31,9 +34,10 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     // accessToken invalid, check for refresh
     if (!refreshToken) {
-      return res.status(401).json({
+      res.status(401).json({
         message: "Invalid or Expired Access Token, and No Refresh Token",
       });
+      return;
     }
 
     try {

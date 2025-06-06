@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { notFound, errorHandler } from "./middleware/error.middleware";
 import inboundRoutes from "./routes/inbound";
 import authRoutes from "./routes/auth";
+import userRoutes from "./routes/user.routes";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/inbound", inboundRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 // middleware
 app.use(notFound);

@@ -88,7 +88,7 @@ REFRESH_TOKEN_SECRET=your_refresh_secret_key
 MAIL_DOMAIN=aakamshpm.space
 ```
 
-# Use ngrok if running locally and update the webhook URL in Postmark inbound settings.
+#### Use ngrok if running locally and update the webhook URL in Postmark inbound settings.
 
 ## 🖥 Frontend Setup
 

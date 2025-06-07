@@ -7,7 +7,7 @@ import Layout from "./components/Layout";
 import AuthRedirect from "./components/AuthRedirect";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
-import Guide from "./pages/Guide";
+import Docs from "./pages/Docs";
 import Profile from "./pages/Profile";
 import HomeRedirect from "./components/HomeRedirect";
 
@@ -34,7 +34,7 @@ const router = createBrowserRouter(
         }
       />
 
-      <Route path="/guide" element={<Guide />} />
+      <Route path="/docs" element={<Docs />} />
     </Route>
   )
 );

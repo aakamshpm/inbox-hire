@@ -1,6 +1,6 @@
 import React from "react";
 
-const Guide: React.FC = () => {
+const Docs: React.FC = () => {
   return (
     <div className="w-full mx-auto px-12 py-12 bg-gray-900 text-gray-100">
       <h1 className="text-3xl font-bold mb-4 text-center">
@@ -91,4 +91,4 @@ const Guide: React.FC = () => {
   );
 };
 
-export default Guide;
+export default Docs;

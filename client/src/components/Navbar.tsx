@@ -40,11 +40,11 @@ const Navbar = () => {
 
           <div className="flex items-center gap-6">
             <Link
-              to="/guide"
+              to="/docs"
               className="hover:text-blue-400 transition-colors flex items-center gap-1"
             >
               <FiBook className="text-sm" />
-              Guide
+              Docs
             </Link>
             {isAuthenticated ? (
               <>
@@ -104,12 +104,12 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4">
             <Link
-              to="/guide"
+              to="/docs"
               className="block hover:text-blue-400 transition-colors py-2 flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
               <FiBook />
-              Guide
+              Docs
             </Link>
             {isAuthenticated ? (
               <>

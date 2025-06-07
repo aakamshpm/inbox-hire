@@ -8,6 +8,7 @@ interface ParsedEmail {
   status?: string;
   notes?: string;
   is_reply?: boolean;
+  isJobApplication?: boolean;
 }
 
 const handleInboundEmail = async (req: Request, res: Response) => {
@@ -26,6 +27,31 @@ const handleInboundEmail = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Accepted" }); // send response early
 
+    // Use AI/email parser
+    const response = await parseEmailWithGemini(Subject, TextBody);
+
+    async function extractJsonString(
+      input: string
+    ): Promise<ParsedEmail | null> {
+      const match = input.match(/```json\s*([\s\S]*?)\s*```/);
+      if (match && match[1]) {
+        try {
+          return JSON.parse(match[1]) as ParsedEmail;
+        } catch (err) {
+          console.error("Invalid JSON content:", err);
+        }
+      }
+      return null;
+    }
+    const parsed = await extractJsonString(response);
+    console.log("Parsed email data:", parsed);
+
+    if (!parsed?.isJobApplication) {
+      console.log("Not a job application email, skipping:", Subject);
+      return;
+    }
+
+    // Checking for user based on email addresses
     // 1. Try OriginalRecipient first
     console.log("OriginalRecipient:", OriginalRecipient);
     if (OriginalRecipient) {
@@ -60,23 +86,6 @@ const handleInboundEmail = async (req: Request, res: Response) => {
       console.log("No User found for email:", OriginalRecipient);
       return;
     }
-
-    // Use AI/email parser
-    const response = await parseEmailWithGemini(Subject, TextBody);
-
-    function extractJsonString(input: string): ParsedEmail | null {
-      const match = input.match(/```json\s*([\s\S]*?)\s*```/);
-      if (match && match[1]) {
-        try {
-          return JSON.parse(match[1]) as ParsedEmail;
-        } catch (err) {
-          console.error("Invalid JSON content:", err);
-        }
-      }
-      return null;
-    }
-    const parsed = extractJsonString(response);
-    console.log("Parsed email data:", parsed);
 
     if (parsed?.is_reply) {
       // Find existing application

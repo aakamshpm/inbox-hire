@@ -21,6 +21,7 @@ Return a JSON with:
   "status": "...", // e.g. "applied", "interview", "rejected", "offer"
   "notes": "...", // summary or key info from body
   "is_reply": true/false
+  "isJobApplication": true/false // true if it's a job application email, if it doesn't seem like a job application, set this to false
 }
 The job_title should be extracted from the subject or body. If the job title is not clear, use "unknown".
 If the email is a reply to an existing application, set "is_reply" to true and include the status and notes.

@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import Guide from "./pages/Guide";
 import Profile from "./pages/Profile";
+import HomeRedirect from "./components/HomeRedirect";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,14 +24,7 @@ const router = createBrowserRouter(
         }
       />
 
-      <Route
-        index
-        element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        }
-      />
+      <Route index element={<HomeRedirect />} />
 
       <Route
         path="/profile"

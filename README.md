@@ -19,7 +19,7 @@
 
 ### 🔗 URL
 
-**Live**: [https://inboxhire.aakamshpm.space](https://inboxhire.aakamshpm.space)
+**Live**: [https://inbox-hire.vercel.app](https://inbox-hire.vercel.app)
 
 ### 👤 Test Credentials
 
@@ -64,7 +64,7 @@
 ### 📦 Clone and Setup
 
 ```bash
-git clone https://github.com/aakamshpm/inboxhire.git
+git clone https://github.com/aakamshpm/inbox-hire.git
 cd inboxhire
 ```
 
@@ -123,7 +123,7 @@ VITE_SERVER_URL=your_backend_url
 
 ### 📹 Demo Video
 
-🎥 Watch on YouTube: _link coming soon_
+🎥 Watch on YouTube: [Link](https://youtu.be/jfegcsduhCw)
 
 ---
 
